@@ -45,12 +45,12 @@ class CardElement extends OxyEl {
             <svg class='my-card__icon' viewbox="0 0 25 28">
                 <use xlink:href="#<?php echo $icon; ?>"></use>
             </svg>
-            <p class='my-card__title'>Title Text</p>
-            <p class='my-card__description'>Praesent ut rutrum ante, et condimentum ante. Maecenas eu pretium turpis.</p>
+            <p class='my-card__title'><?= $options['title_text'] ?></p>
+            <p class='my-card__description'><?= $options['description_text'] ?></p>
             <?php
             if( $options['link_url'] && $options['link_url'] !== '' && $options['link_url'] !== 'https://oxygenbuilder.com' ) {
                 ?>
-                <a class='my-card__link' href='<?= $options['link_url']; ?>'>More Details</a>
+                <a class='my-card__link' href='<?= $options['link_url']; ?>'><?= $options['link_text'] ?></a>
                 <?php
             }
             ?>
@@ -68,6 +68,33 @@ class CardElement extends OxyEl {
 
     function controls() {
 
+        $this->addOptionControl(
+            array(
+                "type" => "textfield",
+                "name" => __("Title"),
+                "slug" => "title_text",
+                "default" => "Card Title"
+            )
+        )->rebuildElementOnChange();
+
+        $this->addOptionControl(
+            array(
+                "type" => "textarea",
+                "name" => __("Description"),
+                "slug" => "description_text",
+                "default" => "Card description goes here."
+            )
+        )->rebuildElementOnChange();
+
+        $this->addOptionControl(
+            array(
+                "type" => "textfield",
+                "name" => __("Link Text"),
+                "slug" => "link_text",
+                "default" => "More details"
+            )
+        )->rebuildElementOnChange();
+
         $card_section = $this->addControlSection("card_section", __("Card"), "assets/icon.png", $this);
 
         $card_section->addStyleControl(
@@ -76,7 +103,7 @@ class CardElement extends OxyEl {
                 "selector" => ".my-card",
                 "property" => "padding",
                 "control-type" => "measurebox",
-                "unit" => "px"
+                "units" => "px"
             )
         );
 
@@ -94,7 +121,7 @@ class CardElement extends OxyEl {
                     "selector" => ".my-card__icon",
                     "property" => 'width',
                     "control_type" => "measurebox",
-                    "unit" => "px" // We don't need to declare a unit since this field is a color picker, but it's useful to do so for measurebox fields
+                    "unit" => "px"
                 )
         );
 
@@ -103,8 +130,7 @@ class CardElement extends OxyEl {
                     "name" => __('Color'),
                     "selector" => ".my-card__icon",
                     "property" => 'fill',
-                    "control_type" => "colorpicker",
-                    // "unit" => "px" // We don't need to declare a unit since this field is a color picker, but it's useful to do so for measurebox fields
+                    "control_type" => "colorpicker"
                 )
         );
 
@@ -165,10 +191,10 @@ class CardElement extends OxyEl {
 
         // // Option controls can be accessed in the render() function via $options['field_slug']
         // $controlSection->addOptionControl(
-		// 	array(
+        //  array(
         //         "type" => 'textfield', // types: textfield, dropdown, checkbox, buttons-list, measurebox, slider-measurebox, colorpicker, icon_finder, mediaurl
-		// 		"name" => 'Field Name',
-		// 		"slug" => 'field_slug'
+        //      "name" => 'Field Name',
+        //      "slug" => 'field_slug'
         //     )
         // );
 
@@ -176,8 +202,8 @@ class CardElement extends OxyEl {
         // $my_control = $controlSection->addOptionControl(
         //     array(
         //         "type" => 'buttons-list', // types: textfield, dropdown, checkbox, buttons-list, measurebox, slider-measurebox, colorpicker, icon_finder, mediaurl
-		// 		"name" => 'Field Name Two',
-		// 		"slug" => 'field_slug_two'
+        //      "name" => 'Field Name Two',
+        //      "slug" => 'field_slug_two'
         //     )
         // );
 
@@ -242,3 +268,4 @@ class CardElement extends OxyEl {
 }
 
 new CardElement();
+
