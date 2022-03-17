@@ -17,9 +17,12 @@ function my_oxygen_elements_init()
         return;
     }
 
-    foreach ( glob(plugin_dir_path(__FILE__) . "elements/*.php" ) as $filename)
+    $path = plugin_dir_path(__FILE__) . "elements"
+    foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $filename)
     {
-        include $filename;
+        if (is_file($filename) && pathinfo($filename)['extension'] == "php") {
+            include $filename;
+        }
     }
 
 }
