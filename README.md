@@ -4,11 +4,11 @@ This repository provides the boilerplate used to create custom API elements in [
 
 ## Usage
 
-| Example                                                                                          | Description                |
-| :----------------------------------------------------------------------------------------------- | :------------------------- |
-| main                                                                                             | The default example.       |
-| [card](elements/card)                                                                            | Create a card element.     |
-| [nestable](https://github.com/Spellhammer/example-oxygen-api-plugin/tree/main/elements/nestable) | Create a nestable element. |
+| Example                       | Description                |
+| :---------------------------- | :------------------------- |
+| main                          | The default example.       |
+| [card](elements/card)         | Create a card element.     |
+| [nestable](elements/nestable) | Create a nestable element. |
 
 This [example](elements/main) creates an example element. Adjust the code from any example to create your own elements!
 
