@@ -36,24 +36,80 @@ class ExampleNestableElement extends OxyEl {
         // return 9;
     }
 
+    /* Uncomment this to have a a predetermined basic structure inserted inside your nestable element when it's added. */
+    /*
+    function prefilledComponentStructure() {
+        return
+            array(
+                array(
+                    "ct_div_block" => array(
+                        array(
+                            "ct_div_block" => array(
+                                "ct_headline",
+                                "ct_text_block",
+                                "ct_image",
+                            )
+                        ),
+                        array(
+                            "ct_div_block" => array(
+                                "ct_headline",
+                                "ct_text_block",
+                                "ct_image",
+                            )
+                        ),
+                        array(
+                            "ct_div_block" => array(
+                                "ct_headline",
+                                "ct_text_block",
+                                "ct_image",
+                            )
+                        ),
+                    )
+                ),
+                "ct_headline"
+            );
+    }
+    */
+
     
     function render($options, $defaults, $content) {
+
+        // $options['tag'] = 'h1';
+        $options['text'] = 'this is my title';
         // Output here.
 
         // This conditional allows backward compatibility with versions prior to Oxygen 4.0
         // and allows the element to work with JSON in Oxygen 4.0
         if ( function_exists('do_oxygen_elements') ) {
-            echo do_oxygen_elements($content); 
+            ?>
+            <!-- content renders here!! -->
+                    <div class="container">
+                        <<?php echo $options['tag'];?> class="title"><?php echo $options['text']; ?></<?php echo $options['tag'];?>>
+                        <div class="content">
+                            <?php
+                                echo do_oxygen_elements($content);          
+                            ?>
+            <!-- I want content here!! -->
+                        </div>
+                    </div>
+            
+                    <?php
         }
         else {
-            echo do_shortcode($content); 
+            ?>
+            <!-- content renders here!! -->
+            <div class="container">
+                <<?php echo $options['tag'];?> class="title"><?php echo $options['tetx']; ?></<?php echo $options['tag'];?>>
+                <div class="content">
+                    <?php
+                        echo do_shortcode($content);          
+                    ?>
+            <!-- I want content here!! -->
+                </div>
+            </div>
+    
+            <?php
         }
-
-        ?>
-
-        <p>We can insert HTML after the elements added to the parent in Oxygen.</p>
-
-        <?php
 
     }
 
